@@ -1,0 +1,113 @@
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { createPageUrl } from "@/utils";
+import { Home, Inbox } from "lucide-react";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarHeader,
+  SidebarFooter,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+
+const navigationItems = [
+  {
+    title: "Website",
+    url: createPageUrl("Home"),
+    icon: Home,
+  },
+  {
+    title: "Inquiries",
+    url: createPageUrl("Dashboard"),
+    icon: Inbox,
+  },
+];
+
+export default function Layout({ children, currentPageName }) {
+  const location = useLocation();
+
+  // If on Home page, don't show sidebar
+  if (currentPageName === "Home") {
+    return <>{children}</>;
+}
+  return (
+    <SidebarProvider>
+      <div className="min-h-screen flex w-full bg-gray-50">
+        <Sidebar className="border-r border-gray-200">
+          <SidebarHeader className="border-b border-gray-200 p-4">
+            <div className="flex items-center gap-3">
+              <img 
+                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690d9005b8e2e95b38aa93a1/f77c72789_Gemini_Generated_Image_2fs6wc2fs6wc2fs6.png"
+                alt="Domestic Trades"
+                className="w-11 h-11 rounded-full object-cover"
+              />
+              <div>
+                <h2 className="font-semibold text-gray-900">Domestic Trades</h2>
+                <p className="text-xs text-gray-500">Admin Dashboard</p>
+              </div>
+            </div>
+          </SidebarHeader>
+          
+          <SidebarContent className="p-2">
+            <SidebarGroup>
+              <SidebarGroupLabel className="text-xs font-medium text-gray-500 uppercase tracking-wider px-2 py-2">
+                Navigation
+              </SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  {navigationItems.map((item) => (
+                    <SidebarMenuItem key={item.title}>
+                      <SidebarMenuButton 
+                        asChild 
+                        className={`hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 rounded-lg mb-1 ${
+                          location.pathname === item.url ? 'bg-gray-100 text-gray-900' : ''
+                        }`}
+                      >
+                        <Link to={item.url} className="flex items-center gap-3 px-3 py-2">
+                          <item.icon className="w-4 h-4" />
+                          <span className="font-medium">{item.title}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          </SidebarContent>
+
+          <SidebarFooter className="border-t border-gray-200 p-4">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-gray-900 rounded-full flex items-center justify-center">
+                <span className="text-white font-medium text-sm">A</span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-medium text-gray-900 text-sm truncate">Admin</p>
+                <p className="text-xs text-gray-500 truncate">Domestic Trades Dashboard</p>
+              </div>
+            </div>
+          </SidebarFooter>
+        </Sidebar>
+
+        <main className="flex-1 flex flex-col">
+          <header className="bg-white border-b border-gray-200 px-6 py-4 md:hidden">
+            <div className="flex items-center gap-4">
+              <SidebarTrigger className="hover:bg-gray-100 p-2 rounded-lg transition-colors duration-200" />
+              <h1 className="text-xl font-semibold">Domestic Trades</h1>
+            </div>
+          </header>
+
+          <div className="flex-1 overflow-auto">
+            {children}
+          </div>
+        </main>
+      </div>
+    </SidebarProvider>
+  );
+}
