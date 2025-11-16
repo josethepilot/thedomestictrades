@@ -1,0 +1,91 @@
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Zap, Heart, Target, Users, Clock, TrendingUp } from "lucide-react";
+
+const benefits = [
+  {
+    icon: Zap,
+    title: "Strategic & Agile",
+    description: "Our team makes efficient decisions and implements strategies rapidly. We adapt quickly to market changes and optimize campaigns in real-time.",
+    color: "bg-gray-100 text-gray-900"
+  },
+  {
+    icon: Heart,
+    title: "Dedicated Partnership",
+    description: "Our team works with a select portfolio of brands to ensure each partnership receives the focused attention and resources needed for success.",
+    color: "bg-gray-100 text-gray-900"
+  },
+  {
+    icon: Target,
+    title: "Results-Focused",
+    description: "Our entire team is aligned on one goal: driving measurable growth for your brand. Every strategy and campaign is designed for maximum impact.",
+    color: "bg-gray-100 text-gray-900"
+  },
+  {
+    icon: Users,
+    title: "True Partnership Model",
+    description: "Your success directly impacts our team's reputation and business. We're fully invested in achieving exceptional results for your brand.",
+    color: "bg-gray-100 text-gray-900"
+  },
+  {
+    icon: Clock,
+    title: "Responsive Team Support",
+    description: "Our team provides fast responses and clear communication. We take immediate action on opportunities and stay proactive on your behalf.",
+    color: "bg-gray-100 text-gray-900"
+  },
+  {
+    icon: TrendingUp,
+    title: "Scalable Solutions",
+    description: "Our proven systems and strategies are designed to scale your online presence efficiently while maintaining profitability and brand integrity.",
+    color: "bg-gray-100 text-gray-900"
+  }
+];
+
+export default function WhyPartner() {
+  return (
+    <section id="why-us" className="py-20 bg-gradient-to-b from-white to-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Why Partner With Us?
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Experience the advantages of working with our dedicated e-commerce distribution team 
+            focused on delivering exceptional results for your brand.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {benefits.map((benefit, index) => (
+            <Card 
+              key={index} 
+              className="border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white"
+            >
+              <CardContent className="p-6">
+                <div className={`w-14 h-14 ${benefit.color} rounded-2xl flex items-center justify-center mb-4`}>
+                  <benefit.icon className="w-7 h-7" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  {benefit.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {benefit.description}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        <div className="mt-16 bg-gradient-to-r from-gray-900 to-black rounded-3xl p-8 md:p-12 text-white text-center">
+          <h3 className="text-3xl md:text-4xl font-bold mb-4">
+            Built for Sustainable Growth
+          </h3>
+          <p className="text-xl opacity-90 max-w-2xl mx-auto">
+            Our team combines strategic expertise with hands-on execution to build lasting success 
+            in e-commerce. Every partnership is built on transparency, accountability, and shared goals.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
